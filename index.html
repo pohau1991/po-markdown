@@ -1,11 +1,63 @@
 <html>
 <head>
 	<title>Markdown</title>
+	<style>
+		.bodyPanel{
+			width:45%;
+			display:inline-block;
+			vertical-align: top;
+		}
+		.form-group{
+			padding: 10px 5px;
+		}
+		.inputLabel{
+			margin-bottom: 10px;
+		}
+		#sampleForMarkdown{
+			display:block;
+			max-width:100%;
+		}
+		.error-msg{
+			color: red;
+		}
+	</style>
 </head>
 <body>
-	<form action="controllers/MarkDownController.php">
-		<textarea name="text" placeholder="enter your desires"></textarea>
-		<button type="submit">Go</button>
-	</form>
+	<div class = 'bodyPanel'>
+		<form action="controllers/MarkDownController.php" id="markdownForm">
+			<div class="form-group">
+			<div class = "inputLabel"><label>Free Writing:</label></div>
+				<textarea rows="12" cols="50" name="sampleForMarkdown" id='sampleForMarkdown' placeholder="enter your desires"></textarea>
+			</div>
+			<div class="form-group">
+				<button type="submit">Go</button>
+			</div>
+		</form>
+	</div>
+	<div class = 'bodyPanel'>
+		<div id = 'markedDownText'></div>
+	</div>
 </body>
+<script src="js/jQuery.js"></script>
+<script>
+	jQuery(document).ready(function($){
+		$('#markdownForm').submit(function(e){
+			e.preventDefault();
+			var temp = $(this);
+			$.ajax({
+		            type: "POST",
+		            dataType: "text",
+		            url: $(this).attr('action'),
+		            data: $(this).find('[name=sampleForMarkdown'),
+		            success: function(response) {
+		 				$('#markedDownText').html(response);
+		            }
+		        });
+
+		});
+		$('[name=sampleForMarkdown]').on('change keyup paste', function(){
+			$('#markedDownText').html('');
+		});
+	});
+</script>
 </html>
