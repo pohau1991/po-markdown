@@ -1,7 +1,7 @@
 <?php
 require_once('Animal.php');
 class Cow extends Animal{
-  public function __construct(Object $obj) {
+  public function __construct($obj) {
     $obj['name'] = isset($obj['name']) ? $obj['name'] : 'unname cow';
     $obj['sound'] = isset($obj['sound']) ? $obj['sound'] : 'moo';
     parent::__construct($obj);
