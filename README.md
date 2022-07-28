@@ -1,4 +1,4 @@
-In order to run this application please pull this project down from git.
+In order to run this application please pull this project down from the <Main> branch.
 RUN CMD "docker-compose up -d --build site";
 If error occur on build, it's likely due to port conflicts, so you might need to change the ports for mysql, php and site in the follow files:
 -docker-compose.root.yml
